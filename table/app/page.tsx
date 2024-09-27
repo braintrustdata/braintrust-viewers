@@ -14,7 +14,7 @@ import { z } from "zod";
 export const dataMessageSchema = z.object({
   type: z.literal("data"),
   data: z.object({
-    input: z.array(z.record(z.unknown())),
+    input: z.array(z.record(z.string())),
   }),
 });
 
@@ -78,7 +78,7 @@ export default function TablePage() {
           <TableRow key={i}>
             {headers.map((header) => (
               <TableCell key={header}>
-                {row[header as keyof typeof row]}
+                {typeof row[header] === "string" ? row[header] : "N/A"}
               </TableCell>
             ))}
           </TableRow>
